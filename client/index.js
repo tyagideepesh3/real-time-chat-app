@@ -1,29 +1,36 @@
-const express = require("express");
+import express from "express";
+import http from "http";
+import { Server } from "socket.io";
+import { SocketHandlers } from "./src/socketHandlers.js";
 const app = express();
-
-const server = require("http").createServer(app);
-const socketio = require("socket.io");
+const server = http.createServer(app);
 
 app.get("/", (req, res) => {
   res.send("Welcome to a good starting");
 });
 
-const io = socketio(server, {
+const io = new Server(server, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
   },
 });
 
-io.on("connection", (client) => {
+io.on("connection", (socket) => {
   console.log("connected successfully");
-  client.on("event", (data) => {
+  const socketHandlers = new SocketHandlers();
+  socketHandlers.createSocketHandler(socket);
+  socket.on("event", (data) => {
     console.log(data);
-    client.emit("event_response", data);
   });
-  client.on("disconnect", () => {
+  socket.on("disconnect", () => {
     console.log("client disconnected");
   });
 });
 
+io.on("GetAllUsers", () => {
+  const users = GetAllUsers();
+  console.log(users);
+  io.emit("users", users);
+});
 server.listen(3001);
