@@ -9,16 +9,26 @@ const ChatPanel = (props: IChatPanel) => {
     const socket = io("http://localhost:3001");
     setSocket(socket);
     if (selectedUser) {
-      socket.emit("GetUserDetails", { userId: selectedUser?.id });
+      socket.emit(
+        "GetUserDetails",
+        { userId: selectedUser?.id },
+        (response) => {
+          console.log(response);
+        }
+      );
     }
-    socket.on("UserDetails", (data) => {
-      console.log(data);
-    });
-  }, [
-    selectedUser,
-    // GetUserDetails
-  ]);
-  return <div>Hi This is the main component for chat</div>;
+    // socket.on("UserDetails", (data) => {
+    //   console.log(data);
+    // });
+  }, [selectedUser]);
+  return (
+    <div>
+      <div className="chat-panel-title">
+        {selectedUser && <h2>{selectedUser.name.toLocaleUpperCase()}</h2>}
+      </div>
+      <div>Chat Section Main</div>
+    </div>
+  );
 };
 
 export default ChatPanel;

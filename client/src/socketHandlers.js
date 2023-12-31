@@ -17,11 +17,12 @@ class SocketHandlers {
       socket.emit("GetUsersList", allUsers);
     });
 
-    socket.on("GetUserDetails", (data) => {
-      console.log(data);
-      socket.emit("UserDetails", {
-        user: "UserDetails",
-      });
+    socket.on("GetUserDetails", ({ userId }, callback) => {
+      console.log(userId);
+      let user = new User();
+      const UserDetails = user.GetUserById(userId);
+      callback(UserDetails);
+      //   socket.emit("UserDetails", UserDetails);
     });
   };
 }

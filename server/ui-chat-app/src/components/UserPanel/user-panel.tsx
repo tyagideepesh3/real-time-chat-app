@@ -33,7 +33,7 @@ const UserPanel = (props: IUserPanel) => {
               cardClickHandler(user);
             }}
           >
-            {user.name}
+            {user.name.toUpperCase()}
           </div>
         );
       })}
