@@ -28,15 +28,28 @@ const ChatPanel = (props: IChatPanel) => {
   };
   const SendButtonHandler = () => {
     // console.log("send ", userText);
+    const userTextInformation = {
+      to_id: selectedUser?.id,
+      to_name: selectedUser?.name,
+      message: userText,
+    };
+    socket.emit("send-text", userTextInformation);
   };
   return (
     <div className="chat-container">
       <div className="chat-panel-title">
-        {selectedUser && <h2>{selectedUser.name.toLocaleUpperCase()}</h2>}
-        <div>
-          <input type="text" onChange={ChangeHandler} />
-          <button onClick={SendButtonHandler}>Send</button>
-        </div>
+        {selectedUser && (
+          <>
+            <div className="chat-title-container">
+              <h2>{selectedUser.name.toLocaleUpperCase()}</h2>
+            </div>
+            <div className="chat-massage-container">dTA</div>
+            <div className="chat-action-container">
+              <input type="text" onChange={ChangeHandler} />
+              <button onClick={SendButtonHandler}>Send</button>
+            </div>
+          </>
+        )}
       </div>
       <div>Chat Section Main</div>
     </div>

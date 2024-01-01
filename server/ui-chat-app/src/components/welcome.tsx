@@ -6,6 +6,7 @@ import UserPanel from "./UserPanel/user-panel.tsx";
 import ChatPanel from "./ChatPanel/chat-panel.tsx";
 import "./style.css";
 import { IUser } from "./Users/IUser.ts";
+import LoginUser from "./Login/login-user.tsx";
 
 const Welcome = () => {
   const [input, setInput] = useState();
@@ -30,6 +31,7 @@ const Welcome = () => {
     <div>
       <input type="text" onChange={inputchangeHandler}></input>
       <button onClick={clickMeHandler}>Click Me</button>
+      <LoginUser />
       <UserList socket={socket} />
       <div className="container">
         <UserPanel

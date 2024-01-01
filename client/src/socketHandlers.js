@@ -24,6 +24,19 @@ class SocketHandlers {
       callback(UserDetails);
       //   socket.emit("UserDetails", UserDetails);
     });
+
+    socket.on("send-text", (userTextInformation) => {
+      console.log(userTextInformation);
+      //   socket.broadcast.emit("receive-text", userTextInformation);
+    });
+
+    socket.on("GetUserDetailsByUserName", (userName, callback) => {
+      console.log(userName);
+      let user = new User();
+      const UserDetails = user.GetUserByUserName(userName);
+      callback(UserDetails);
+      //   socket.emit("
+    });
   };
 }
 export { SocketHandlers };

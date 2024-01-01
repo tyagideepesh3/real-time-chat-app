@@ -2,3 +2,13 @@
     background-color: antiquewhite;
     height: 350px;
 }
+.chat-action-container{
+    height: 15%;
+}
+.chat-massage-container{
+    height: 70%;
+    
+}
+.chat-title-container{
+    height: 15%;
+}
